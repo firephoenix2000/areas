@@ -1,4 +1,3 @@
-
 # -- coding: utf-8 --
 # @Time : 7/8/22 11:35 PM
 # @Author : yudejun
@@ -10,7 +9,9 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
+from random import random,gauss
 
+from shape import Triangle,Point
 
 
 def print_hi(name):
@@ -19,8 +20,45 @@ def print_hi(name):
 
 
 
+def generate_data():
+
+    with open('data.txt', mode='a', encoding='utf-8') as datafile:
+
+
+
+        for i in range(10):
+            x1 = random()*10
+            y1 = random()*10
+            x2 = random()*10
+            y2 = random()*10
+            x3 = random()*10
+            y3 = random()*10
+
+            triangle = Triangle(Point(x1, y1), Point(x2, y2), Point(x3, y3))
+            s = triangle.calc_area()
+            gaussnumber  = gauss(0,1)
+            print('gaussnumber is :', gaussnumber)
+            adjust_s = s * gaussnumber
+            print(s, adjust_s)
+            w_list = [x1,y1,x2,y2,x3,y3,adjust_s]
+
+            writestr = x1,y1,x2,y2,x3,y3,adjust_s
+
+            datafile.write(str(writestr)+'\n')
+
+
+
+
+
+
+
+
+
+
+
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print_hi('PyCharm')
+    generate_data()
 
