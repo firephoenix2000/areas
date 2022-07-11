@@ -54,7 +54,7 @@ class Triangle:
         y3 = self.point_c.y
 
         # s = 0.5*(x1*y2 - x1*y3 + x2*y3 -x2*y1 +x3*y1 - x2*y2)
-        s =0.5 * (x1 * y2 - x1 * y3 + x2 * y3 - x2 * y1 + x3 * y1 - x2 * y2)
+        s = abs(0.5 * (x1 * y3 + x2 * y1 + x3 * y2 - x1 * y2 - x2 * y3 - x3 * y1))
 
         return s
 
