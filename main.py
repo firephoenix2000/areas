@@ -10,7 +10,6 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 from random import random,gauss
-
 from shape import Triangle,Point
 
 
@@ -19,14 +18,11 @@ def print_hi(name):
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
 
 
-
 def generate_data():
 
     with open('data.txt', mode='a', encoding='utf-8') as datafile:
 
-
-
-        for i in range(10):
+        for i in range(50):
             x1 = random()*10
             y1 = random()*10
             x2 = random()*10
@@ -36,29 +32,15 @@ def generate_data():
 
             triangle = Triangle(Point(x1, y1), Point(x2, y2), Point(x3, y3))
             s = triangle.calc_area()
-            gaussnumber  = gauss(0,1)
+            gaussnumber = gauss(0,0.04)
             print('gaussnumber is :', gaussnumber)
-            adjust_s = s * gaussnumber
+            adjust_s = s * (1+ gaussnumber)
             print(s, adjust_s)
-            w_list = [x1,y1,x2,y2,x3,y3,adjust_s]
-
+            # w_list = [x1,y1,x2,y2,x3,y3,adjust_s]
             writestr = x1,y1,x2,y2,x3,y3,adjust_s
-
             datafile.write(str(writestr)+'\n')
 
-
-
-
-
-
-
-
-
-
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    # print_hi('PyCharm')
     generate_data()
 

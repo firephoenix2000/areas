@@ -5,6 +5,8 @@
 # @File : shape.py
 # @Software: PyCharm
 
+from random import random
+
 
 class Point:
     """
@@ -58,3 +60,14 @@ class Triangle:
 
         return s
 
+
+def generate_triangle_data(scope=10):
+
+    a = random() * scope
+    b = random() * scope
+    c = random() * scope
+    d = random() * scope
+    e = random() * scope
+    f = random() * scope
+
+    return (a,b,c,d,e,f)
