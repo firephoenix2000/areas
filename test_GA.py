@@ -7,7 +7,7 @@
 
 
 import unittest
-from ga import genetic_algorithm, generate_chromosomes, select
+from ga import genetic_algorithm, init_chromosomes, select, crossover, mutate
 from shape import generate_triangle_data, Triangle, Point
 
 class TestGA(unittest.TestCase):
@@ -45,7 +45,7 @@ class TestGA(unittest.TestCase):
         the formula length is between 20 and 60, and gene is  in gene list.
         '''
         gene_list = ['a', 'b', 'c', 'd', 'e', 'f', '+', '-', '*']
-        chromosomes = generate_chromosomes(10)
+        chromosomes = init_chromosomes(10)
         for chromosome in chromosomes:
             length = len(chromosome)
             self.assertLessEqual(length, 60)
@@ -57,7 +57,7 @@ class TestGA(unittest.TestCase):
 
     def test_select(self):
 
-        chromosomes = generate_chromosomes(100)
+        chromosomes = init_chromosomes(100)
         selected = select(chromosomes)
         (a, b, c, d, e, f) = generate_triangle_data(10)
         triangle = Triangle(Point(a, b), Point(c, d), Point(d, f))
@@ -65,7 +65,7 @@ class TestGA(unittest.TestCase):
 
         # for k in range(0,len(selected)-1, 5):
         #     print(k)
-
+        # print(selected)
         start_formula = selected[0]
         end_formula = selected[len(selected)-1]
 
@@ -73,6 +73,27 @@ class TestGA(unittest.TestCase):
         s2 = 0.5 * abs(eval(end_formula))
 
         self.assertLess(abs(s1-s),abs(s2-s))
+
+
+    def test_crossover(self):
+        init_chroms = [ 'e*d*e*a*b-b*e*c+f+a+a+c', 'f*b*b-c*f+c*b+d*d+b+e+a+f+e' , 'e*e-b-e+d+d+b+e*d-b-c-e-b+b*f*d*b*c', 'e-a+c-a*b*d+c*f-c+a*f-e+d-e*e']
+
+        gene_chroms = crossover(init_chroms)
+
+        self.assertEqual(4, len(gene_chroms))
+
+        self.assertEqual('e*d*e*a*b-b*b-c-e-b+b*f*d*b*c',gene_chroms[0])
+        self.assertEqual('f*b*b-c*f+c*b+b-c-e-b+b*f*d*b*c',gene_chroms[2])
+
+    def test_mutate(self):
+        begin = 'f*b*b-c*f+c*b+b-c-e-b+b*f*d*b*c'
+        after = mutate(begin)
+        self.assertNotEqual(begin,after)
+        # print(after)
+        gene_set = {'a', 'b', 'c', 'd', 'e', 'f', '+', '-', '*'}
+        for s in after:
+            self.assertIn(s, gene_set)
+
 
 
 if __name__ == '__main__':
