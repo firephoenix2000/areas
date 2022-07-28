@@ -114,6 +114,7 @@ def select(chromosomes):
         data_item = [x1,y1,x2,y2,x3,y3,area]
         data.append(data_item)
 
+
     chromo_dict = {}
     i = 0
     try:
@@ -127,6 +128,7 @@ def select(chromosomes):
                 e = item[4]
                 f = item[5]
                 s = item[6]
+
                 result = 0.5 * abs(eval(chromosome))
                 delta = (result - s)/s
                 total_delta += abs(delta)
@@ -135,6 +137,7 @@ def select(chromosomes):
             i=i+1
             # chromo_dict[aver_delta] = chromosome
             chromo_dict[chromosome] = aver_delta
+
         if len(chromosomes) > 3*len(chromo_dict):
             print(chromosomes)
             print(chromo_dict)

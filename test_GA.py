@@ -20,7 +20,13 @@ class TestGA(unittest.TestCase):
         # self.default_formula = None
         pass
 
-
+    def test_init_chromosomes(self):
+        '''
+        test init chromosomes.
+        '''
+        chromosomes = init_chromosomes(50)
+        for chromosome in chromosomes:
+            print(chromosome)
 
     def test_calculate(self):
         '''
@@ -72,9 +78,12 @@ class TestGA(unittest.TestCase):
         gene_chroms = crossover(init_chroms)
 
         self.assertEqual(4, len(gene_chroms))
+        print(gene_chroms)
 
         self.assertEqual('e*d*e*a*b-b*b-c-e-b+b*f*d*b*c', gene_chroms[0])
         self.assertEqual('f*b*b-c*f+c*b+b-c-e-b+b*f*d*b*c', gene_chroms[2])
+
+
 
     def test_mutate(self):
         begin = 'f*b*b-c*f+c*b+b-c-e-b+b*f*d*b*c'
